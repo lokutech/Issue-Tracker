@@ -1,8 +1,7 @@
 const express = require('express')
-const app = express() //* Instantiates an Express application
-require('dotenv').config() //* To access process.env. | ex. PORT
-const helmet = require('helmet') //* Security
-// const mongoose = require('mongoose') //* For connecting to Mongodb database
+const app = express()
+require('dotenv').config()
+const helmet = require('helmet')
 // const connectmongo = require('connect-mongo') //* Allows storing sessions to the database so if the server is reset user doesn't get logged out.
 // const expresssession = require('express-session') //* For sessions and cookies
 // const handlebars = require('express-handlebars') //* Templating engine
@@ -10,10 +9,7 @@ const helmet = require('helmet') //* Security
 // const moment = require('moment') //* Used to format dates
 // const morgan = require('morgan') //* For login
 // const passport = require('passport') //* For Authentication
-// const connectDB = require('./db')
 
-// Connects to database
-// connectDB()
 
 //~~ MIDDLEWARES ~~ //
 // Body Parser
@@ -26,13 +22,15 @@ app.use(helmet())
 // Static Routes
 app.use(express.static('public'))
 
-// Route
-app.get('/', (req, res) => {
-  res.send('لا اله الا الله')
-})
+// Routes
+app.use('/api/issues', require('./routes/apiRoute'))
+app.use('/', require('./routes/indexRoute'))
+
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Listening on port ${process.env.PORT} in ${process.env.mode} mode`)
+  console.log(
+    `Listening on port ${process.env.PORT} in ${process.env.NODE_ENV} mode`,
+  )
 })
 
 //* to remove side comments with regex \/\/\*.*
