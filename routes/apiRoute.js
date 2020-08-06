@@ -8,6 +8,8 @@ const IssueML = require('../models/IssueML')
 // @desc   api/issues/subject
 // @route  POST /
 router.post('/:subject', async (req, res) => {
+  console.log('post called')
+  console.log(req.body)
   try {
     req.body.issue_subject = req.params.subject
 
@@ -53,28 +55,66 @@ router.get('/:subject', async (req, res) => {
 router.put('/:subject', async (req, res) => {
   try {
     // Check for no fields sent
-    if (Object.keys(req.body).length === 0){
+    // console.log(req.body,'body')
+    // console.log(req.params,'params');
+    // console.log(req.query,'query');
+    let obj = {...req.params, ...req.body, ...req.query}
+
+    console.log(obj)
+    if (obj._id === '') {
       res.send('no updated field sent.')
-    } else  {
+    } else {
       req.body.issue_subject = req.params.subject
       req.body.updated_on = new Date()
-      let updated = await IssueML.findOneAndUpdate({_id:req.body._id}, req.body, {new: true} )
-      console.log(updated);
+
+      let updated = await IssueML.findOneAndUpdate(
+        { _id: obj._id },
+        removeEmptyFields(obj),
+        { new: true },
+      )
+      console.log(updated, 'updated')
       if (updated !== null) {
-        res.send('Successfully updated')
+        res.redirect('/home')
       } else {
         res.status(500).send('could not update ' + req.body._id)
-
       }
     }
-
   } catch (error) {
     console.error(error)
     res.status(500).send('could not update ' + req.body._id)
   }
-  // res.send(updated)
-  // console.log(updated)
 })
 
+// @desc   api/issues/subject
+// @route  DELETE /
+router.delete('/:subject', async (req, res) => {
+  // Check for no id and set id
+  let id = req.query._id || req.body._id
+  console.log(id);
+  try {
+    // Delete
+    let deleted = await IssueML.findOneAndRemove({
+      issue_subject: 'home',
+      _id: id,
+    })
+    if (deleted !== null) {
+      res.json({ success: 'deleted' })
+    } else {
+      // If unable to delete
+      res.status(500).json({ err: 'unable to delete' })
+    }
+  } catch (error) {
+    res.status(500).json({ err: 'unable to delete' })
+  }
+})
 
 module.exports = router
+
+// Helper Functions
+function removeEmptyFields(query) {
+  for (key in query) {
+    query[key] === '' && delete query[key]
+    String(query[key]).match(/^\s+$/) ? (query[key] = '') : null
+  }
+  return query
+}

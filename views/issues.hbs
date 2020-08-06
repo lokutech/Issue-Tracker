@@ -1,0 +1,89 @@
+<h5 class="center">Issues for home</h5>
+<div class="row">
+
+    <div class="col s4 offset-s4">
+        <div class="card">
+            <div class="input-field">
+                <div class="card-content">
+                    <h6>Submit a new issue:</h6>
+                    <div class="row">
+                        <form action="/api/issues/home" method="post">
+                            {{!-- First Row --}}
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    <input placeholder="*Title" id="title-submit" name="issue_title" type="text"
+                                        class="validate" required>
+                                    <label for="title-submit">Title</label>
+                                </div>
+                                <div class="input-field col s5 offset-s1">
+                                    <input placeholder="*Submitted by" id="submittedby-submit" name="created_by"
+                                        type="text" class="validate">
+                                    <label for="submittedby-submit">Submitted by</label>
+                                </div>
+                            </div>
+                            {{!-- Second Row --}}
+                            <div class="row">
+                                <div class="input-field col s11">
+                                    <textarea id="textarea-submit" name="issue_text" class="materialize-textarea"
+                                        placeholder="*Text"></textarea>
+                                    <label for="textarea-submit">Textarea</label>
+                                </div>
+                            </div>
+                            {{!-- Third Row --}}
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    <input placeholder="(opt)Assigned to" id="assignedto-submit" name="assigned_to"
+                                        type="text" class="validate">
+                                    <label for="assignedto-submit">Assigned to</label>
+                                </div>
+                                <div class="input-field col s5 offset-s1">
+                                    <input placeholder="(opt)Status text" id="status-submit" name="status_text"
+                                        type="text" class="validate">
+                                    <label for="status-submit">Status text</label>
+                                </div>
+                            </div>
+                            <button class="btn waves-effect waves-light">Submit Issue
+                        </form>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#each sortedResponse}}
+<div class="container ">
+    <div class="row ">
+
+        <div class="card col s6 offset-s3">
+            <div class="card-content {{#unless open}}grey-text{{/unless}}">
+
+                <p class="bold"><strong>Id:</strong> {{_id}}</p>
+                <p><strong>Title:</strong> {{issue_title}}{{#unless open}} <span class="new badge grey"
+                        data-badge-caption="Closed" {{/unless}}></span></p>
+                <p><strong>Text:</strong> {{issue_text}}</p>
+                <p><strong>Submitted on: </strong>{{formatDate created_on 'MMMM Do YYYY, h:mm:ss a'}} </p>
+                <p><strong>Updated on: </strong> {{formatDate updated_on 'MMMM Do YYYY, h:mm:ss a'}}</p>
+                <p><strong>Submitted by:</strong> {{created_by}}</p>
+                <p><strong>Assigned to:</strong> {{assigned_to}}</p>
+                <p><strong>Status text:</strong> {{status_text}}</p>
+                {{#if open}}
+                <form action="/api/issues/home?_id={{_id}}&open=false" method="POST" id="edit-open"
+                    style="display:inline-block; position:absolute; right:80px;">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button class="btn amber"><i class="material-icons">clear</i>
+                    </button></form>
+                {{/if }}
+                <form action="/api/issues/home/?_id={{_id}}" method="POST" id="delete-form "
+                    style="display:inline-block; position:absolute;right:20px"><input type="hidden" name="_method"
+                        value="DELETE"><button class="btn red"><i class="material-icons">delete</i>
+                    </button></form>
+
+                <div class="section"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="row">
+
+        {{!-- Submit Issue --}}
+        <div class="col s4">
+            <div class="card">
+                <div class="input-field">
+                    <div class="card-content">
+                        <h5>Submit a new issue:</h5>
+                        <div class="row">
+                            <form action="/api/issues/home" method="post">
+                                {{!-- First Row --}}
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <input placeholder="*Title" id="title-submit" name="issue_title" type="text"
+                                            class="validate">
+                                        <label for="title-submit">Title</label>
+                                    </div>
+                                    <div class="input-field col s5 offset-s1">
+                                        <input placeholder="*Submitted by" id="submittedby-submit" name="created_by"
+                                            type="text" class="validate">
+                                        <label for="submittedby-submit">Submitted by</label>
+                                    </div>
+                                </div>
+                                {{!-- Second Row --}}
+                                <div class="row">
+                                    <div class="input-field col s11">
+                                        <textarea id="textarea-submit" name="issue_text" class="materialize-textarea"
+                                            placeholder="*Text"></textarea>
+                                        <label for="textarea-submit">Textarea</label>
+                                    </div>
+                                </div>
+                                {{!-- Third Row --}}
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <input placeholder="(opt)Assigned to" id="assignedto-submit" name="assigned_to"
+                                            type="text" class="validate">
+                                        <label for="assignedto-submit">Assigned to</label>
+                                    </div>
+                                    <div class="input-field col s5 offset-s1">
+                                        <input placeholder="(opt)Status text" id="status-submit" name="status_text"
+                                            type="text" class="validate">
+                                        <label for="status-submit">Status text</label>
+                                    </div>
+                                </div>
+                                <button class="btn waves-effect waves-light">Submit Issue
+                            </form>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Edit Issue --}}
+        <div class="col s4">
+            <div class="card">
+                <div class="input-field">
+                    <div class="card-content">
+                        <h5>Update an issue
+                        </h5>
+                        <div class="row">
+                            <form action="/api/issues/home" method="post">
+                                <input type="hidden" name="_method" value="PUT">
+                                {{!-- First Row --}}
+                                <div class="row">
+                                    <div class="input-field col s8">
+                                        <input placeholder="*_id" id="id-edit" name="_id" type="text" class="validate">
+                                        <label for="_id-edit">id</label>
+                                    </div>
+                                </div>
+                                {{!-- Second Row --}}
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <input placeholder="(opt)Title" id="title-edit" name="issue_title" type="text"
+                                            class="validate">
+                                        <label for="title-edit">Title</label>
+                                    </div>
+                                    <div class="input-field col s5 offset-s1">
+                                        <input placeholder="(opt)Submitted by" id="submittedby-edit" name="created_by"
+                                            type="text" class="validate">
+                                        <label for="submittedby-edit">Submitted by</label>
+                                    </div>
+                                </div>
+                                {{!-- Third Row --}}
+                                <div class="row">
+                                    <div class="input-field col s11">
+                                        <textarea id="textarea-edit" name="issue_text" class="materialize-textarea"
+                                            placeholder="(opt)Text"></textarea>
+                                        <label for="textarea-edit">Textarea</label>
+                                    </div>
+                                </div>
+                                {{!-- Fourth Row --}}
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <input placeholder="(opt)Assigned to" id="assignedto-edit" name="assigned_to"
+                                            type="text" class="validate">
+                                        <label for="assignedto-edit">Assigned to</label>
+                                    </div>
+                                    <div class="input-field col s5 offset-s1">
+                                        <input placeholder="(opt)Status text" id="status-edit" name="status_text"
+                                            type="text" class="validate">
+                                        <label for="status-edit">Status text</label>
+                                    </div>
+                                </div>
+                                <button class="btn waves-effect waves-light" name="edit">Update Issue
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Delete Issue --}}
+        <div class="col s4">
+            <div class="input-field">
+                <div class="card">
+                    <div class="card-content">
+                        <h5>Delete an issue:</h5>
+                        <div class="row">
+                            <form action="/api/issues/home" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {{!-- First Row --}}
+                                <div class="row">
+                                    <div class="input-field col s8">
+                                        <input placeholder="*id" id="id-delete" name="_id" type="text" class="validate">
+                                        <label for="id-delete">_id</label>
+                                    </div>
+                                </div>
+                                <button class="btn waves-effect waves-light" type="submit" name="delete">Delete Issue
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
