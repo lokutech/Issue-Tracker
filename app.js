@@ -3,16 +3,15 @@ const express = require('express')
 const app = express()
 require('dotenv').config()
 const helmet = require('helmet')
-const exphbs = require('express-handlebars') //* Templating engine
-const methodOverride = require('method-override') //* Allows you to make put and delete requests
-const moment = require('moment') //* Used to format dates
-// const morgan = require('morgan') //* For login
-// const passport = require('passport') //* For Authentication
+const exphbs = require('express-handlebars') 
+const methodOverride = require('method-override') 
+const moment = require('moment') 
+
 
 //~~ MIDDLEWARES ~~ //
 // Body Parser
-app.use(express.json({ extended: false })) //* It parses incoming requests with JSON payloads
-app.use(express.urlencoded({ extended: false })) //* Body parser makes req.body. available
+app.use(express.json({ extended: false })) 
+app.use(express.urlencoded({ extended: false })) 
 // Method Override
 app.use(
   methodOverride(function (req, res) {
@@ -47,4 +46,4 @@ app.listen(process.env.PORT || 3000, () => {
   )
 })
 
-//* to remove side comments with regex \/\/\*.*
+
