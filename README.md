@@ -24,6 +24,6 @@
 
 
 
-##Issue Tracker
+## Issue Tracker
 
 This is a simple issue tracker app built with nodejs.
