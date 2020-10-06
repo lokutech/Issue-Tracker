@@ -16,3 +16,10 @@ h5 {
 h6 {
     margin-bottom: 30px;
 }
+
+img {
+    position: absolute;
+    width:8%;
+    right:0px;
+    top: 20px;
+}
