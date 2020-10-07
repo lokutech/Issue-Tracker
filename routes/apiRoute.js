@@ -8,7 +8,6 @@ const IssueML = require('../models/IssueML')
 // @desc   api/issues/subject
 // @route  POST /
 router.post('/:subject', async (req, res) => {
-  console.log('post called')
   console.log(req.body)
   try {
     req.body.issue_subject = req.params.subject

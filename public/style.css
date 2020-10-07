@@ -3,15 +3,15 @@
 } */
 
 
-/* #container {
-    width: 200px;
-    background: red;
-} */
+#container {
+    width: 200px !important;
+    background: red !important;
+}
 
 h5 {
     margin-bottom: 30px !important;
     color: #ee6e73;
-}
+} 
 
 h6 {
     margin-bottom: 30px;
@@ -22,4 +22,8 @@ img {
     width:8%;
     right:0px;
     top: 20px;
+}
+
+form {
+    padding-left: 20px;
 }

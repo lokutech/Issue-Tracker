@@ -8,7 +8,6 @@ const IssueML = require('../models/IssueML')
 // @desc   Index
 // @route  GET /
 router.get('/', (req, res) => {
-  console.log('index called');
     res.render('home')
   })
 
