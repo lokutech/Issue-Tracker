@@ -61,7 +61,7 @@
 
                 <p class="bold"><strong>Id:</strong> {{_id}}</p>
                 <p><strong>Title:</strong> {{issue_title}}{{#unless open}} <span class="new badge grey"
-                        data-badge-caption="Closed" {{/unless}}></span></p>
+                        data-badge-caption="Closed"></span>{{/unless}}</p>
                 <p><strong>Text:</strong> {{issue_text}}</p>
                 <p><strong>Submitted on: </strong>{{formatDate created_on 'MMMM Do YYYY, h:mm:ss a'}} </p>
                 <p><strong>Updated on: </strong> {{formatDate updated_on 'MMMM Do YYYY, h:mm:ss a'}}</p>
